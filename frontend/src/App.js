@@ -1,26 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Header from './Components/Header';
+import NoteList from './Components/NoteList'
+import SearchBar from './Components/SearchBar'
 import './App.css';
 
 class App extends Component {
+
+  constructor(){
+    super();
+    this.state = {
+      notes: []
+    }
+  }
+
+  componentDidMount(){
+    fetch('http://localhost:3000/notes')
+      .then(resp => resp.json())
+      .then(data => {this.setState({notes: data})
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Hello World!
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-          >
-            Thankfully
-          </a>
-        </header>
+        <Header />
+        <SearchBar />
+        <NoteList notes={this.state.notes}/>
       </div>
     );
   }
+
 }
 
 export default App;
