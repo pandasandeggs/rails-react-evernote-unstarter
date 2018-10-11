@@ -2,19 +2,18 @@ import React, { Component } from 'react';
 
 class Note extends Component {
 
+
   render() {
+    console.log("passed to Note", this.props)
     return (
-      <div className="Note">
-        <div className="sidebar">
-          <div className="row">
-            <div className="col-sm-4">
-              <h3>{this.props.note.title}</h3>
-              <p>{this.props.note.body}</p>
-            </div>
-          </div>
-        </div>
+      <div className="col-sm-8">
+        <h3>{this.props.title}</h3>
+        <p>{this.props.body}</p>
+        <br/>
+        <button>Edit</button>
+        <button>Share</button>
       </div>
-    );
+    )
   }
 }
 

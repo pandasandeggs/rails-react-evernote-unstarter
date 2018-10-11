@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
-import Note from '../Components/Note'
+import NoteCard from '../Components/NoteCard'
 
 class NoteList extends Component {
 
-  getNotes = () => {
-    this.props.notes = (note => {
-      <Note className="content" note={note} />
-    })
+  getNotes(){
+   return this.props.notes.map( note =>
+      <div key={note.id}>
+        <div>
+          <NoteCard title={note.title} body={note.body} />
+          ___________________
+
+        </div>
+      </div>
+    );
   }
 
   render() {
     return (
       <div>
-        {this.getNotes}
+        {this.getNotes()}
       </div>
-    );
+    )
   }
 }
 

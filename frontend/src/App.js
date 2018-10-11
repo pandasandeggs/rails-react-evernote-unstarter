@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
-import NoteList from './Components/NoteList'
-import SearchBar from './Components/SearchBar'
+import Main from './Components/Main'
+
 import './App.css';
 
 class App extends Component {
@@ -9,7 +9,8 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      notes: []
+      notes: [],
+      displayed: false
     }
   }
 
@@ -20,12 +21,15 @@ class App extends Component {
     });
   }
 
+  handleClick = (e) => {
+    //fill this in
+  }
+
   render() {
     return (
       <div className="App">
         <Header />
-        <SearchBar />
-        <NoteList notes={this.state.notes}/>
+        <Main notes={this.state.notes}/>
       </div>
     );
   }
