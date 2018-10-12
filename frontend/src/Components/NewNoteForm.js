@@ -8,10 +8,20 @@ class NewNoteForm extends Component {
   }
 
   handleTitleChange = e => this.setState({title: e.target.value});
+
   handleBodyChange = e => this.setState({body: e.target.value});
+  
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e, this.state);
+    fetch('http://localhost:3000/notes', {
+      method: "post",
+      headers: {
+        'Content-Type':'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    }).then(resp => resp.json())
+      .then(data => console.log(data))
   }
 
   render() {

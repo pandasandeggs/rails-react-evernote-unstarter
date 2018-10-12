@@ -8,12 +8,11 @@ import '../App.css';
 class Main extends Component {
 
   state = {
-    chosenNote: {},
+    chosenNote: this.props.notes[0],
     displayNewForm: false
   }
 
   handleNoteClick = note => {
-    console.log(note)
     this.setState({
       chosenNote: note,
       displayNewForm: false
@@ -28,9 +27,7 @@ class Main extends Component {
 
   }
 
-
   render() {
-
     const {displayNewForm} = this.state;
 
     return (

@@ -24,7 +24,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Main notes={this.state.notes}/>
+        {this.state.notes.length > 0 ?
+          <Main notes={this.state.notes}/> : ''
+        }
       </div>
     );
   }
