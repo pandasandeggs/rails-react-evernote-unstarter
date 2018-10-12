@@ -24,9 +24,75 @@ div img {
   width: 130px;
 }
 
-.new-button{
-  margin-bottom: 25px;
+/* /////////////////////NEW CSS //////////////////////////////// */
+
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+.row.content {height: 1500px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  background-color: #FAD9B6;
+  height: 75%;
+  padding-top: 25px;
+  padding-bottom: 0px;
+  margin-top: 179px;
+  margin-bottom: 0px;
 }
+
+/* Set black background color, white text and some padding */
+header {
+  background-color: #555;
+  color: white;
+  padding: 75px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height: auto;}
+}
+
+.new-button {
+  position: fixed;
+  float: left;
+  margin-top: 600px;
+  margin-left: 100px;
+}
+
+.main-button1 {
+  position: fixed;
+  display: inline-block;
+  float: right;
+  margin-top: 110px;
+  margin-right: 0px;
+}
+
+.main-button2 {
+  position: fixed;
+  display: inline-block;
+  float: right;
+  margin-top: 75px;
+  margin-right: 0px;
+}
+
+.col-sm-9 {
+  float: right;
+  position: fixed;
+  padding-top: 15px;
+  margin-top: 185px;
+  margin-left: 315px;
+  height: 75%;
+}
+
+/* /////////////////////NEW CSS END /////////////////////////// */
+
+
+/* .new-button{
+  margin-bottom: 25px;
+} */
 
 ::-webkit-scrollbar {
     width: 20px;
@@ -49,14 +115,14 @@ div img {
     background: #b30000;
 }
 
-div.content {
+/* div.content {
   margin: 0;
   padding: 1px 16px;
   height: 1000px;
   float: right;
-}
+} */
 
-.sidenav {
+/* .sidenav {
   border-style: solid;
   position: absolute;
   background-color: #FAD9B6;
@@ -71,13 +137,13 @@ div.content {
   margin-top: 182px;
   margin-right: 450px;
   margin-bottom: 0px;
-}
+} */
 
-.main-container {
+/* .main-container {
   position: fixed;
   height: 75%;
   width: 100%;
   margin-top: 23%;
   margin-left: 1px;
   padding: 0px 10px;
-}
+} */
