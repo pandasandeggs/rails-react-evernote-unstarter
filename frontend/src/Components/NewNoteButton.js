@@ -5,7 +5,7 @@ class NewNoteButton extends Component {
   render() {
     return (
       <div className="new-button">
-        <button>New Letter</button>
+        <button onClick={e => this.props.handleNewClick(e.target)} >New Letter</button>
       </div>
     )
   }

@@ -8,26 +8,39 @@ import '../App.css';
 class Main extends Component {
 
   state = {
-    chosenNote: {}
+    chosenNote: {},
+    displayNewForm: false
   }
 
-  handleClick = note => {
+  handleNoteClick = note => {
     console.log(note)
     this.setState({
-      chosenNote: note
+      chosenNote: note,
+      displayNewForm: false
     })
+  }
+
+  handleNewClick = e => {
+    this.setState({
+      chosenNote: {},
+      displayNewForm: true
+    })
+
   }
 
 
   render() {
+
+    const {displayNewForm} = this.state;
+
     return (
       <div className="container-fluid">
         <div className="row">
-          <NoteList className="col-sm-4" notes={this.props.notes} handleClick={this.handleClick}/>
+          <NoteList className="col-sm-4" notes={this.props.notes} handleNoteClick={this.handleNoteClick}/>
           <Note className="col-sm-8" title={this.state.chosenNote.title} body={this.state.chosenNote.body}/>
           <br/>
-          <NewNoteButton className="new-button" />
-          <NewNoteForm />
+          <NewNoteButton className="new-button" handleNewClick={this.handleNewClick} />
+          {displayNewForm ? <NewNoteForm /> : null}
         </div>
       </div>
     );
