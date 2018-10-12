@@ -9,8 +9,7 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      notes: [],
-      displayed: false
+      notes: []
     }
   }
 
@@ -19,10 +18,6 @@ class App extends Component {
       .then(resp => resp.json())
       .then(data => {this.setState({notes: data})
     });
-  }
-
-  handleClick = (e) => {
-    //fill this in
   }
 
   render() {
