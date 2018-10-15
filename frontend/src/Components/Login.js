@@ -12,7 +12,8 @@ class Login extends Component {
   handlePasswordChange = e => this.setState({password: e.target.value});
 
   handleSubmit = (e) => {
-    console.log(this.state)
+    e.preventDefault();
+    this.props.login(this.state.username, this.state.password)
   }
 
   render() {
@@ -20,23 +21,22 @@ class Login extends Component {
     return (
       <div className="card mb-3">
         <div className="card-header">Login</div>
-        <div className="card-body">
-          <form className="form-group" onSubmit={this.handleSubmit}>
-            <label>
-            Username:
-              <input className="form-control form-control-lg" type="text" name="Username" value={username} onChange={this.handleUsernameChange}/>
-            </label>
-            <br/><br/>
-            <label>
-            Psssword:
-              <input className="form-control form-control-lg" value={password} onChange={this.handlePasswordChange}/>
-            </label>
-            <br/><br/><br/>
-              <input type="submit" value="Login" />
-          </form>
-        </div>
+          <div className="card-body">
+            <form className="form-group" onSubmit={this.handleSubmit}>
+              <label>
+              Username:
+                <input className="form-control form-control-lg" type="text" name="Username" value={username} onChange={this.handleUsernameChange}/>
+              </label>
+              <br/><br/>
+              <label>
+              Password:
+                <input className="form-control form-control-lg" value={password} type="password" onChange={this.handlePasswordChange}/>
+              </label>
+              <br/><br/><br/>
+                <input type="submit" value="Login" />
+            </form>
+          </div>
       </div>
-    </div>
     );
   }
 }

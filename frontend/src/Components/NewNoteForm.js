@@ -10,7 +10,7 @@ class NewNoteForm extends Component {
   handleTitleChange = e => this.setState({title: e.target.value});
 
   handleBodyChange = e => this.setState({body: e.target.value});
-  
+
   handleSubmit = (e) => {
     e.preventDefault();
     fetch('http://localhost:3000/notes', {
