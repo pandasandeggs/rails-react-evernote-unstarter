@@ -6,12 +6,15 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = Note.create(note_params)
+    @note = Note.new(note_params)
+    @note.user = current_user
+    @note.save
+    render :json => @note
   end
 
   private
   def note_params
-    params.require(:note).permit(:title, :body, :user_id)
+    params.require(:note).permit(:title, :body)
   end
 
 end

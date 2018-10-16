@@ -12,16 +12,23 @@ class NewNoteForm extends Component {
   handleBodyChange = e => this.setState({body: e.target.value});
 
   handleSubmit = (e) => {
+    console.log("title", this.state.title, "body", this.state.body)
+    // debugger
+    const token = localStorage.token
     e.preventDefault();
     fetch('http://localhost:3000/notes', {
-      method: "post",
+      method: "POST",
       headers: {
         'Content-Type':'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({
+        title: this.state.title,
+        body: this.state.body
+      })
     }).then(resp => resp.json())
-      .then(data => console.log(data))
+      .then(data => console.log("the data", data))
   }
 
   render() {

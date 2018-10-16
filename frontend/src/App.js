@@ -77,15 +77,16 @@ class App extends Component {
 
 
   render() {
+    console.log("get the id", this.state.currentUser)
     return (
         <React.Fragment>
           <Header user={this.state.currentUser}/>
-            /*<div>
+            <div>
             {this.state.notes.length > 0 && this.state.currentUser.id === this.state.currentUser.notes[0].user_id ?
               <Main notes={this.state.notes}/>
-              : <h1>"You are not authorized to view these letters. Please login."</h1>
+              : null
               }
-            </div>*/
+            </div>
             <div>{!this.state.currentUser.id ?
               <Login login={this.login}/>
             :<Main notes={this.state.notes}/>
