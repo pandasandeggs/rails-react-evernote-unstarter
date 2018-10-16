@@ -27,7 +27,7 @@ class ApplicationController < ActionController::API
 
   def current_user
     if decoded_token
-      username = decoded_token['user_id']
+      user_id = decoded_token['user_id']
       User.find_by(id: user_id)
     end
   end
@@ -39,7 +39,7 @@ class ApplicationController < ActionController::API
   def check_auth
     render json: {
       message: 'Please log in',
-      }, status: 401 if !logged_in?
+      }, status: 401 unless logged_in?
   end
 
 end

@@ -25,6 +25,7 @@ class App extends Component {
       }
     }) .then(resp => resp.json())
         .then(data => {
+          /* Won't give me data unless I'm loggin in, but login is below. Is this needed? */
           if(!data.error){
             this.setState({
               currentUser: data
@@ -33,13 +34,6 @@ class App extends Component {
         })
   }
 
-  getUserNotes = () => {
-    fetch('http://localhost:3000/notes')
-      .then(resp => resp.json())
-      .then(data => {this.setState({notes: data})
-    });
-  }
-  
   login = (username, password) => {
     fetch('http://localhost:3000/api/v1/login', {
       method: "POST",
@@ -53,33 +47,51 @@ class App extends Component {
     })
       .then(resp => resp.json())
       .then(data => {
+        /* data is the user object with token and nested notes */
         if(!data.error){
-          getUserNotes()
-          localStorage.token = data.token;
+          localStorage.token = data.jwt;
           this.setState({
             currentUser: data.user,
-            displayLogin: false,
-            notes: data.user.notes
+            displayLogin: false
           })
         } else {
           this.setState({
             loginError: data.error
           })
         }
+      }).then( () => {
+        const token = localStorage.token
+        fetch('http://localhost:3000/notes/', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {this.setState({notes: data})
+          /* data is a message that asks me to login even after I have logged in */
+        })
+
       })
   }
 
+
+
   render() {
     return (
-        <div>
-          {!this.state.currentUser.id ? <Login login={this.login}/>
-          : <h5>Hello {this.state.currentUser.username}!</h5> }
-          <Header />
-            {this.state.notes.length > 0 ?
-              <Main notes={this.state.notes}/> : ''
-            }
-        </div>
-
+        <React.Fragment>
+          <Header user={this.state.currentUser}/>
+            /*<div>
+            {this.state.notes.length > 0 && this.state.currentUser.id === this.state.currentUser.notes[0].user_id ?
+              <Main notes={this.state.notes}/>
+              : <h1>"You are not authorized to view these letters. Please login."</h1>
+              }
+            </div>*/
+            <div>{!this.state.currentUser.id ?
+              <Login login={this.login}/>
+            :<Main notes={this.state.notes}/>
+              }
+            </div>
+        </React.Fragment>
     );
   }
 

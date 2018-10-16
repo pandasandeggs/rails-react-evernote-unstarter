@@ -8,7 +8,7 @@ import '../App.css';
 class Main extends Component {
 
   state = {
-    chosenNote: this.props.notes[0],
+    chosenNote: {}/*this.props.notes[0]*/,
     displayNewForm: false
   }
 
