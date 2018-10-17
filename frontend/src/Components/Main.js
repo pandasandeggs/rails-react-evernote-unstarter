@@ -34,7 +34,7 @@ class Main extends Component {
       <div className="container-fluid">
         <div className="row">
           <NoteList className="col-sm-4" notes={this.props.notes} handleNoteClick={this.handleNoteClick}/>
-          <Note className="col-sm-8" title={this.state.chosenNote.title} body={this.state.chosenNote.body}/>
+          <Note className="col-sm-8" id={this.state.chosenNote.id} title={this.state.chosenNote.title} body={this.state.chosenNote.body}/>
           <br/>
           <NewNoteButton className="new-button" handleNewClick={this.handleNewClick} />
           {displayNewForm ? <NewNoteForm /> : null}
