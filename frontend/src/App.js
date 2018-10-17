@@ -77,12 +77,13 @@ class App extends Component {
 
 
   render() {
+    console.log("get the id", this.state.currentUser)
     return (
         <React.Fragment>
           <Header user={this.state.currentUser}/>
             <div>
             {this.state.notes.length > 0 && this.state.currentUser.id === this.state.currentUser.notes[0].user_id ?
-              <Main notes={this.state.notes} />
+              <Main notes={this.state.notes}/>
               : null
               }
             </div>

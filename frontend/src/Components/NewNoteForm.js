@@ -12,6 +12,8 @@ class NewNoteForm extends Component {
   handleBodyChange = e => this.setState({body: e.target.value});
 
   handleSubmit = (e) => {
+    console.log("title", this.state.title, "body", this.state.body)
+    // debugger
     const token = localStorage.token
     e.preventDefault();
     fetch('http://localhost:3000/notes', {
