@@ -26,7 +26,7 @@ class NewNoteForm extends Component {
         body: this.state.body
       })
     }).then(resp => resp.json())
-      .then(data => console.log("the data", data))
+      .then(data => this.props.createdNote(data))
   }
 
   render() {

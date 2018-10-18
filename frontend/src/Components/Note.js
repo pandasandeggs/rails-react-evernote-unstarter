@@ -17,7 +17,6 @@ class Note extends Component {
 
   handleDelete = e => {
     const token = localStorage.token
-    e.preventDefault(); /* Do I need to take this out so it renders immediately? */
     fetch(`http://localhost:3000/notes/${this.props.id}`, {
       method: "DELETE",
       headers: {
@@ -25,9 +24,8 @@ class Note extends Component {
         'Accept': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-    }).then(resp => resp.json())
+    }).then(resp => this.props.deletedNote(resp))
   }
-
 
   render() {
     const {displayEditForm} = this.state;
@@ -38,9 +36,9 @@ class Note extends Component {
         <p className="note-body">{this.props.body}</p>
         <br/>
         <button onClick={e => this.handleEdit(e.target)}>Edit Letter</button><br/>
-        {displayEditForm ? <EditNoteForm id={this.props.id} title={this.props.title} body={this.props.body}/> : null}
+        {displayEditForm ? <EditNoteForm id={this.props.id} title={this.props.title} body={this.props.body} editedNote={this.props.editedNote}/> : null}
         <button>Share Letter</button><br/>
-        <button onClick={e => this.handleDelete(e.target)} >Delete Letter</button><br/>
+        <button onClick={e => this.handleDelete(e.target)}>Delete Letter</button><br/>
       </div>
     )
   }

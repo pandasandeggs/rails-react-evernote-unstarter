@@ -72,6 +72,31 @@ class App extends Component {
         })
 
       })
+
+  }
+
+  createNote = (noteObj) => {
+    this.setState({
+      notes: [...this.state.notes, noteObj]
+    })
+  }
+
+  updateNote = (noteObj) => {
+    const note = this.state.notes.find( note => note.id === noteObj.id)
+    const oldNoteIndex = this.state.notes.indexOf(note)
+    this.state.notes.splice(oldNoteIndex, 1, noteObj)
+    this.setState({
+      notes: [...this.state.notes]
+    })
+  }
+
+  deleteNote = (noteObj) => {
+    const note = this.state.notes.find( note => note.id === noteObj.id)
+    const oldNoteIndex = this.state.notes.indexOf(note)
+    this.state.notes.splice(oldNoteIndex,1)
+    this.setState({
+      notes: [...this.state.notes]
+    })
   }
 
   render() {
@@ -80,7 +105,7 @@ class App extends Component {
           <Header user={this.state.currentUser}/>
             <div>
             {this.state.notes.length > 0 && this.state.currentUser.id === this.state.currentUser.notes[0].user_id ?
-              <Main notes={this.state.notes}/>
+              <Main notes={this.state.notes} editedNote={this.updateNote} createdNote={this.createNote} deletedNote={this.deleteNote}/>
               : <Login login={this.login}/>
               }
             </div>

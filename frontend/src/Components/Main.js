@@ -37,10 +37,10 @@ class Main extends Component {
             <NoteList notes={this.props.notes} handleNoteClick={this.handleNoteClick}/>
           </div>
           <div className="col-sm-8">
-            <Note id={this.state.chosenNote.id} title={this.state.chosenNote.title} body={this.state.chosenNote.body}/>
+            <Note id={this.state.chosenNote.id} title={this.state.chosenNote.title} body={this.state.chosenNote.body} editedNote={this.props.editedNote} deletedNote={this.props.deletedNote}/>
             <br/>
             <NewNoteButton className="new-button" handleNewClick={this.handleNewClick} />
-            {displayNewForm ? <NewNoteForm /> : null}
+            {displayNewForm ? <NewNoteForm createdNote={this.props.createdNote}/> : null}
           </div>
         </div>
       </div>

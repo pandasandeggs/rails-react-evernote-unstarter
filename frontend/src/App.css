@@ -30,7 +30,9 @@ div img {
 
 .sidenav {
   background-color: #FAD9B6;
-  margin-top: 25px;
+  margin-top: 5px;
+  overflow-y: hidden;
+  width: 200px;
 }
 
 @media screen and (max-width: 767px) {
@@ -48,22 +50,6 @@ div img {
   margin-left: 55px;
 }
 
-/* .main-button1 {
-  position: fixed;
-  display: inline-block;
-  float: right;
-  margin-top: 110px;
-  margin-right: 0px;
-} */
-
-/* .main-button2 {
-  position: fixed;
-  display: inline-block;
-  float: right;
-  margin-top: 75px;
-  margin-right: 0px;
-} */
-
 .col-sm-8 {
   float: right;
   position: fixed;
@@ -72,6 +58,12 @@ div img {
   margin-left: 315px;
   height: 75%;
 }
+
+/* .col-sm-4 {
+  float: right;
+  position: fixed;
+  width: 200px;
+} */
 
 .container-fluid {
   height: 15%;

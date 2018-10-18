@@ -8,7 +8,7 @@ class NoteList extends Component {
    return this.props.notes.map( note =>
       <div key={note.id} onClick={ e => this.props.handleNoteClick(note)} className="container-fluid">
         <div className="row content">
-          <div className="col-sm-3 sidenav">
+          <div className="col-sm-4 sidenav">
             <NoteCard title={note.title} body={note.body}/>
             _______________________
           </div>
@@ -16,6 +16,7 @@ class NoteList extends Component {
       </div>
     );
   }
+
 
   render() {
     return (

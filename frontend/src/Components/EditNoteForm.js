@@ -13,7 +13,7 @@ class EditNoteForm extends Component {
 
   handleEdit = e => {
     const token = localStorage.token
-    e.preventDefault(); /* Do I need to take this out so it renders immediately? */
+    e.preventDefault();
     fetch(`http://localhost:3000/notes/${this.props.id}`, {
       method: "PATCH",
       headers: {
@@ -26,7 +26,7 @@ class EditNoteForm extends Component {
         body: this.state.body
       })
     }).then(resp => resp.json())
-      .then(data => console.log("the data", data))
+      .then(data => this.props.editedNote(data))
   }
 
   render(){
