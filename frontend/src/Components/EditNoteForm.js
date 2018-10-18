@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 
-class NewNoteForm extends Component {
+class EditNoteForm extends Component {
 
   state = {
-    title: '',
-    body: ''
+    title: this.props.title,
+    body: this.props.body,
   }
 
-  handleTitleChange = e => this.setState({title: e.target.value});
+  handleEditTitle = e => {this.setState({title: e.target.value})}
 
-  handleBodyChange = e => this.setState({body: e.target.value});
+  handleEditBody = e => {this.setState({body: e.target.value })}
 
-  handleSubmit = (e) => {
+  handleEdit = e => {
     const token = localStorage.token
     e.preventDefault(); /* Do I need to take this out so it renders immediately? */
-    fetch('http://localhost:3000/notes', {
-      method: "POST",
+    fetch(`http://localhost:3000/notes/${this.props.id}`, {
+      method: "PATCH",
       headers: {
         'Content-Type':'application/json',
         'Accept': 'application/json',
@@ -29,24 +29,24 @@ class NewNoteForm extends Component {
       .then(data => console.log("the data", data))
   }
 
-  render() {
+  render(){
     const { title, body } = this.state;
     return (
-      <div className="col-sm-8">
-        <div className="card mb-3">
-          <div className="card-header">Create New Letter</div>
+      <div className="col-sm-8 mx-auto">
+        <div className="card">
+          <div className="card-header">Edit Letter</div>
           <div className="card-body">
-            <form className="form-group" onSubmit={this.handleSubmit}>
+            <form className="form-group" onSubmit={this.handleEdit}>
               <label>
               Title:
-                <input className="form-control form-control-md" type="text" name="Title" value={title} onChange={this.handleTitleChange}/>
+                <input className="form-control form-control-md" type="text" name="Title" value={title} onChange={this.handleEditTitle}/>
               </label>
               <br/><br/>
               <label>
               Letter:
-                <textarea className="form-control form-control-lg" value={body} onChange={this.handleBodyChange}/>
+                <textarea className="form-control form-control-lg" value={body} onChange={this.handleEditBody}/>
               </label>
-              <br/><br/><br/>
+              <br/>
                 <input className="far fa-save" type="submit" value="Save Letter" />
             </form>
           </div>
@@ -54,6 +54,7 @@ class NewNoteForm extends Component {
       </div>
     )
   }
+
 }
 
-export default NewNoteForm;
+export default EditNoteForm;

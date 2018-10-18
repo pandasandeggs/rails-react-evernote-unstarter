@@ -33,11 +33,15 @@ class Main extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <NoteList className="col-sm-4" notes={this.props.notes} handleNoteClick={this.handleNoteClick}/>
-          <Note className="col-sm-8" title={this.state.chosenNote.title} body={this.state.chosenNote.body}/>
-          <br/>
-          <NewNoteButton className="new-button" handleNewClick={this.handleNewClick} />
-          {displayNewForm ? <NewNoteForm /> : null}
+          <div className="col-sm-4">
+            <NoteList notes={this.props.notes} handleNoteClick={this.handleNoteClick}/>
+          </div>
+          <div className="col-sm-8">
+            <Note id={this.state.chosenNote.id} title={this.state.chosenNote.title} body={this.state.chosenNote.body}/>
+            <br/>
+            <NewNoteButton className="new-button" handleNewClick={this.handleNewClick} />
+            {displayNewForm ? <NewNoteForm /> : null}
+          </div>
         </div>
       </div>
     );

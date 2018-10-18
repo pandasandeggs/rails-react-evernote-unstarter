@@ -24,29 +24,15 @@ div img {
   width: 130px;
 }
 
-/* /////////////////////NEW CSS //////////////////////////////// */
+.row.content {
+  height: 250px;
+}
 
-/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.row.content {height: 1500px}
-
-/* Set gray background color and 100% height */
 .sidenav {
   background-color: #FAD9B6;
-  height: 65%;
-  padding-top: 25px;
-  padding-bottom: 0px;
-  margin-top: 179px;
-  margin-bottom: 0px;
+  margin-top: 25px;
 }
 
-/* Set black background color, white text and some padding */
-header {
-  background-color: #555;
-  color: white;
-  padding: 75px;
-}
-
-/* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
   .sidenav {
     height: auto;
@@ -59,41 +45,39 @@ header {
   position: fixed;
   float: left;
   margin-top: 600px;
-  margin-left: 100px;
+  margin-left: 55px;
 }
 
-.main-button1 {
+/* .main-button1 {
   position: fixed;
   display: inline-block;
   float: right;
   margin-top: 110px;
   margin-right: 0px;
-}
+} */
 
-.main-button2 {
+/* .main-button2 {
   position: fixed;
   display: inline-block;
   float: right;
   margin-top: 75px;
   margin-right: 0px;
-}
+} */
 
 .col-sm-8 {
   float: right;
   position: fixed;
   padding-top: 15px;
-  margin-top: 185px;
+  margin-top: 20px;
   margin-left: 315px;
   height: 75%;
 }
 
 .container-fluid {
   height: 15%;
-  margin-top: 51px;
+  margin-top: 0px;
   overflow-y: hidden;
 }
-
-/* /////////////////////NEW CSS END /////////////////////////// */
 
 ::-webkit-scrollbar {
     width: 20px;
