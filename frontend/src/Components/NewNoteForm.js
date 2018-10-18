@@ -4,7 +4,8 @@ class NewNoteForm extends Component {
 
   state = {
     title: '',
-    body: ''
+    body: '',
+    hideNewForm: false
   }
 
   handleTitleChange = e => this.setState({title: e.target.value});
@@ -27,30 +28,38 @@ class NewNoteForm extends Component {
       })
     }).then(resp => resp.json())
       .then(data => this.props.createdNote(data))
+
+    this.setState({
+      hideNewForm: true
+    })
   }
 
   render() {
-    const { title, body } = this.state;
+    const { title, body, hideNewForm} = this.state;
     return (
-      <div className="col-sm-8">
-        <div className="card mb-3">
-          <div className="card-header">Create New Letter</div>
-          <div className="card-body">
-            <form className="form-group" onSubmit={this.handleSubmit}>
-              <label>
-              Title:
-                <input className="form-control form-control-md" type="text" name="Title" value={title} onChange={this.handleTitleChange}/>
-              </label>
-              <br/><br/>
-              <label>
-              Letter:
-                <textarea className="form-control form-control-lg" value={body} onChange={this.handleBodyChange}/>
-              </label>
-              <br/><br/><br/>
-                <input className="far fa-save" type="submit" value="Save Letter" />
-            </form>
+      <div>
+        {hideNewForm ? null :
+        <div className="col-sm-8">
+          <div className="card mb-3">
+            <div className="card-header">Create New Letter</div>
+            <div className="card-body">
+              <form className="form-group" onSubmit={this.handleSubmit}>
+                <label>
+                Title:
+                  <input className="form-control form-control-md" type="text" name="Title" value={title} onChange={this.handleTitleChange}/>
+                </label>
+                <br/><br/>
+                <label>
+                Letter:
+                  <textarea className="form-control form-control-lg" value={body} onChange={this.handleBodyChange}/>
+                </label>
+                <br/><br/><br/>
+                  <input className="far fa-save" type="submit" value="Save Letter" />
+              </form>
+            </div>
           </div>
         </div>
+        }
       </div>
     )
   }

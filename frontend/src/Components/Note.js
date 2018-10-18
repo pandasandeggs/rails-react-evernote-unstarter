@@ -10,8 +10,9 @@ class Note extends Component {
   }
 
   handleEdit = e => {
+    const { displayEditForm } = this.state;
     this.setState({
-      displayEditForm: true
+      displayEditForm: !displayEditForm
     })
   }
 
@@ -36,7 +37,7 @@ class Note extends Component {
         <p className="note-body">{this.props.body}</p>
         <br/>
         <button onClick={e => this.handleEdit(e.target)}>Edit Letter</button><br/>
-        {displayEditForm ? <EditNoteForm id={this.props.id} title={this.props.title} body={this.props.body} editedNote={this.props.editedNote}/> : null}
+        {displayEditForm ? <EditNoteForm id={this.props.id} title={this.props.title} body={this.props.body} editedNote={this.props.editedNote} handleEdit={this.handleEdit}/> : null}
         <button>Share Letter</button><br/>
         <button onClick={e => this.handleDelete(e.target)}>Delete Letter</button><br/>
       </div>

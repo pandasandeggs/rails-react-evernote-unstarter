@@ -10,7 +10,6 @@ class NoteList extends Component {
         <div className="row content">
           <div className="col-sm-4 sidenav">
             <NoteCard title={note.title} body={note.body}/>
-            _______________________
           </div>
         </div>
       </div>

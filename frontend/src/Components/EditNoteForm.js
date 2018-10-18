@@ -5,6 +5,7 @@ class EditNoteForm extends Component {
   state = {
     title: this.props.title,
     body: this.props.body,
+    hideEditForm: false
   }
 
   handleEditTitle = e => {this.setState({title: e.target.value})}
@@ -27,11 +28,17 @@ class EditNoteForm extends Component {
       })
     }).then(resp => resp.json())
       .then(data => this.props.editedNote(data))
+
+    this.setState({
+      hideEditForm: true
+    })
   }
 
   render(){
-    const { title, body } = this.state;
+    const { title, body, hideEditForm } = this.state;
     return (
+      <div>
+      {hideEditForm ? null:
       <div className="col-sm-8 mx-auto">
         <div className="card">
           <div className="card-header">Edit Letter</div>
@@ -47,11 +54,13 @@ class EditNoteForm extends Component {
                 <textarea className="form-control form-control-lg" value={body} onChange={this.handleEditBody}/>
               </label>
               <br/>
-                <input className="far fa-save" type="submit" value="Save Letter" />
+                <input className="far fa-save" type="submit" value="Save Letter"/>
             </form>
           </div>
         </div>
       </div>
+      }
+    </div>
     )
   }
 
