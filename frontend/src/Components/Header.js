@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from '../Components/SearchBar'
+import Login from '../Components/Login'
 
 class Header extends Component {
 

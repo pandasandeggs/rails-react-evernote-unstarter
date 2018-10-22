@@ -23,10 +23,16 @@ class Main extends Component {
 
   handleNewClick = e => {
     this.setState({
-      chosenNote: this.props.createdNote, /* This was an empty object */
+      chosenNote: {},
       displayNewForm: !this.state.displayNewForm
     })
 
+  }
+
+  showNewNote = note => {
+    this.setState({
+      chosenNote: note,
+    })
   }
 
   handleEditClick = note => {
@@ -54,12 +60,13 @@ class Main extends Component {
             { notes.length ? <NoteList notes={notes} searchResults={searchResults} handleSearchSubmit= {handleSearchSubmit} handleNoteClick={this.handleNoteClick} /> : null}
           </div>
           <div>
-            {chosenNote ? <Note id={this.state.chosenNote.id} title={this.state.chosenNote.title} body={this.state.chosenNote.body} editedNote={this.props.editedNote} showEdit={this.handleEditClick} deletedNote={this.props.deletedNote}
+            {chosenNote ? <Note id={this.state.chosenNote.id} title={this.state.chosenNote.title} body={this.state.chosenNote.body} editedNote={this.props.editedNote} handleEditClick={this.handleEditClick}
+            handleNewClick={this.handleNewClick} deletedNote={this.props.deletedNote}
             handleRemoveChosenNote= {this.handleRemoveChosenNote}/> : null }
             <br/>
-            <NewNoteButton className="new-button" handleNewClick={this.handleNewClick} />
-            {displayNewForm ? <NewNoteForm createdNote={this.props.createdNote} handleNew={this.handleNewClick}/> : ''}
-            {displayEditForm ? <EditNoteForm {...this.state.chosenNote} editedNote={this.props.editedNote} handleEdit={this.handleEditClick}/> : null}
+            <NewNoteButton className="new-button" handleNewClick={this.handleNewClick} showNewNote={this.showNewNote} />
+            {displayNewForm ? <NewNoteForm createdNote={this.props.createdNote} handleNewClick={this.handleNewClick} showNewNote={this.showNewNote}/> : ''}
+            {displayEditForm ? <EditNoteForm {...this.state.chosenNote} editedNote={this.props.editedNote} handleEditClick={this.handleEditClick} /> : null}
           </div>
         </div>
       </div>

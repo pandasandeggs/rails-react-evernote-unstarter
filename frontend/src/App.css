@@ -2,16 +2,6 @@
   text-align: center;
 }
 
-/* .App-header {
-  background-color: #FAD9B6;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-} */
-
 .page-header {
   background-color: #FCA448;
   width: 100%;
@@ -49,7 +39,6 @@ div img {
   position: fixed;
   float: left;
   margin-top: 400px;
-  margin-left: -200px;
 }
 
 div.col-sm-8.mx-auto {

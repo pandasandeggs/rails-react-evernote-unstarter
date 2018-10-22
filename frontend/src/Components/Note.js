@@ -6,8 +6,7 @@ class Note extends Component {
   state = {
     id: this.props.id,
     title: this.props.title,
-    body: this.props.body,
-    removeNote: false
+    body: this.props.body
   }
 
 
@@ -19,12 +18,6 @@ class Note extends Component {
     }
 
     return false;
-  }
-
-  hideNote = e => {
-    this.setState({
-      removeNote: true
-    })
   }
 
   handleDelete = e => {
@@ -41,20 +34,18 @@ class Note extends Component {
   }
 
   render() {
-    const { title, body, removeNote } = this.state;
+    const { title, body } = this.state;
 
     return (
       <div>
-      {removeNote ? null :
       <div className="col-sm-8">
         <h3 className="note-title">{this.props.title}</h3>
         <p className="note-body">{this.props.body}</p>
         <br/>
-        <button onClick={() => this.props.showEdit(this.state)}>Edit Letter</button><br/>
+        <button onClick={() => this.props.handleEditClick(this.state)}>Edit Letter</button><br/>
         <button>Share Letter</button><br/>
         <button onClick={e => this.handleDelete(e.target)}>Delete Letter</button><br/>
       </div>
-      }
       </div>
     )
   }

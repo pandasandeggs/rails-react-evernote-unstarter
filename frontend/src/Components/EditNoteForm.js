@@ -26,9 +26,10 @@ class EditNoteForm extends Component {
         body: this.state.body
       })
     }).then(resp => resp.json())
-      .then(data => this.props.editedNote(data))
-
-    this.props.handleEdit();
+      .then(data => {
+        this.props.editedNote(data)
+        this.props.handleEditClick(data)
+      })
   }
 
   render(){

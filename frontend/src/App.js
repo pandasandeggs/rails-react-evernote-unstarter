@@ -115,14 +115,22 @@ class App extends Component {
 
   }
 
+  handleLogout = e => {
+    localStorage.clear()
+    this.setState({
+      currentUser: null
+    })
+  }
+
   render() {
     const { currentUser, displayLogin } = this.state;
     return (
         <React.Fragment>
-          <Header user={currentUser} handleSearchSubmit= {this.handleSearchSubmit} />
+          <Header user={currentUser} handleSearchSubmit= {this.handleSearchSubmit} handleLogout={this.handleLogout}/>
             <div>
             { !displayLogin ?
-              <Main notes={this.state.notes} editedNote={this.updateNote} createdNote={this.createNote} deletedNote={this.deleteNote} searchResults={this.state.searchResults} handleSearchSubmit= {this.handleSearchSubmit}/>
+              <Main notes={this.state.notes} editedNote={this.updateNote} createdNote={this.createNote} deletedNote={this.deleteNote} searchResults={this.state.searchResults} handleSearchSubmit= {this.handleSearchSubmit}
+              />
               : <Login login={this.login}/>
               }
             </div>
