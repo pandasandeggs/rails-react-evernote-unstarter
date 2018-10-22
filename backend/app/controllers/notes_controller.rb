@@ -1,8 +1,14 @@
 class NotesController < ApplicationController
 
   def index
-    @notes = Note.all
+    @notes = current_user.notes
     render :json => @notes
+  end
+
+  def find
+    @notes = current_user.notes
+    notes = @notes.select{|note| note.title.include?(params[:search_term]) || note.body.include?(params[:search_term])}
+    render :json => notes
   end
 
   def create

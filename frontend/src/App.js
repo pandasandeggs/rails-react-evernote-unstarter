@@ -11,30 +11,34 @@ class App extends Component {
     super();
     this.state = {
       notes: [],
-      currentUser: {},
-      displayLogin: true
+      currentUser: null,
+      displayLogin: true,
+      searchResults: []
     }
   }
 
   componentDidMount(){
     const token = localStorage.token
-    fetch('http://localhost:3000/api/v1/profile',{
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    }) .then(resp => resp.json())
-        .then(data => {
-          /* Won't give me data unless I'm loggin in, but login is below. Is this needed? */
-          if(!data.error){
-            this.setState({
-              currentUser: data
-            })
-          }
-        })
+    if (token) {
+      fetch('http://localhost:3000/api/v1/profile',{
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }) .then(resp => resp.json())
+          .then(data => {
+            if(!data.error){
+              this.setState({
+                currentUser: data
+              })
+            }
+          })
+    }
+
   }
 
   login = (username, password) => {
+    localStorage.clear()
     fetch('http://localhost:3000/api/v1/login', {
       method: "POST",
       body: JSON.stringify({
@@ -47,7 +51,7 @@ class App extends Component {
     })
       .then(resp => resp.json())
       .then(data => {
-        /* data is the user object with token and nested notes */
+        /* data = user object with token and nested notes */
         if(!data.error){
           localStorage.token = data.jwt;
           this.setState({
@@ -68,7 +72,6 @@ class App extends Component {
         })
           .then(resp => resp.json())
           .then(data => {this.setState({notes: data})
-          /* data is a message that asks me to login even after I have logged in */
         })
 
       })
@@ -99,13 +102,27 @@ class App extends Component {
     })
   }
 
+  handleSearchSubmit = searchTerm => {
+    const token = localStorage.token
+    fetch(`http://localhost:3000/notes/${searchTerm}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(resp => resp.json())
+      .then(data => this.setState({
+        searchResults: data
+      }))
+
+  }
+
   render() {
+    const { currentUser, displayLogin } = this.state;
     return (
         <React.Fragment>
-          <Header user={this.state.currentUser}/>
+          <Header user={currentUser} handleSearchSubmit= {this.handleSearchSubmit} />
             <div>
-            {this.state.notes.length > 0 && this.state.currentUser.id === this.state.currentUser.notes[0].user_id ?
-              <Main notes={this.state.notes} editedNote={this.updateNote} createdNote={this.createNote} deletedNote={this.deleteNote}/>
+            { !displayLogin ?
+              <Main notes={this.state.notes} editedNote={this.updateNote} createdNote={this.createNote} deletedNote={this.deleteNote} searchResults={this.state.searchResults} handleSearchSubmit= {this.handleSearchSubmit}/>
               : <Login login={this.login}/>
               }
             </div>

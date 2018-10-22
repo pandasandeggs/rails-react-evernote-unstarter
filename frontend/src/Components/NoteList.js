@@ -4,7 +4,17 @@ import NoteCard from '../Components/NoteCard'
 class NoteList extends Component {
 
   getNotes(){
-    console.log("in NoteList", this.props.notes)
+    if (this.props.searchResults.length > 0){
+      return this.props.searchResults.map( search =>
+         <div key={search.id} onClick={ e => this.props.handleNoteClick(search)} className="container-fluid">
+           <div className="row content">
+             <div className="col-sm-4 sidenav">
+               <NoteCard title={search.title} body={search.body}/>
+             </div>
+           </div>
+         </div>
+       );
+    } else {
    return this.props.notes.map( note =>
       <div key={note.id} onClick={ e => this.props.handleNoteClick(note)} className="container-fluid">
         <div className="row content">
@@ -13,9 +23,9 @@ class NoteList extends Component {
           </div>
         </div>
       </div>
-    );
+      );
+    }
   }
-
 
   render() {
     return (
