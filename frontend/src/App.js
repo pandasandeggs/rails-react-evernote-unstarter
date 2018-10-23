@@ -29,9 +29,21 @@ class App extends Component {
           .then(data => {
             if(!data.error){
               this.setState({
-                currentUser: data
+                currentUser: data,
+                displayLogin: false
               })
             }
+          }).then( () => {
+            const token = localStorage.token
+            fetch('http://localhost:3000/notes/', {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            })
+              .then(resp => resp.json())
+              .then(data => {this.setState({notes: data})
+            })
+
           })
     }
 
@@ -93,10 +105,9 @@ class App extends Component {
     })
   }
 
-  deleteNote = (noteObj) => {
-    const note = this.state.notes.find( note => note.id === noteObj.id)
-    const oldNoteIndex = this.state.notes.indexOf(note)
-    this.state.notes.splice(oldNoteIndex,1)
+  deleteNote = (id) => {
+    const note = this.state.notes.findIndex(note => note.id === id)
+    this.state.notes.splice(note,1)
     this.setState({
       notes: [...this.state.notes]
     })

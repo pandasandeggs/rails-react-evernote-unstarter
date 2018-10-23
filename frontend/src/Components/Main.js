@@ -59,9 +59,10 @@ class Main extends Component {
           <div className="col-sm-4">
             { notes.length ? <NoteList notes={notes} searchResults={searchResults} handleSearchSubmit= {handleSearchSubmit} handleNoteClick={this.handleNoteClick} /> : null}
           </div>
-          <div>
+          <div className="col-sm-8">
             {chosenNote ? <Note id={this.state.chosenNote.id} title={this.state.chosenNote.title} body={this.state.chosenNote.body} editedNote={this.props.editedNote} handleEditClick={this.handleEditClick}
             handleNewClick={this.handleNewClick} deletedNote={this.props.deletedNote}
+            
             handleRemoveChosenNote= {this.handleRemoveChosenNote}/> : null }
             <br/>
             <NewNoteButton className="new-button" handleNewClick={this.handleNewClick} showNewNote={this.showNewNote} />

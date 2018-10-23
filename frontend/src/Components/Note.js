@@ -20,7 +20,7 @@ class Note extends Component {
     return false;
   }
 
-  handleDelete = e => {
+  handleDelete = () => {
     const token = localStorage.token
     fetch(`http://localhost:3000/notes/${this.props.id}`, {
       method: "DELETE",
@@ -29,7 +29,8 @@ class Note extends Component {
         'Accept': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-    }).then(resp => this.props.deletedNote(resp))
+    })
+      this.props.deletedNote(this.props.id);
       this.props.handleRemoveChosenNote();
   }
 
@@ -44,7 +45,7 @@ class Note extends Component {
         <br/>
         <button onClick={() => this.props.handleEditClick(this.state)}>Edit Letter</button><br/>
         <button>Share Letter</button><br/>
-        <button onClick={e => this.handleDelete(e.target)}>Delete Letter</button><br/>
+        <button onClick={this.handleDelete}>Delete Letter</button><br/>
       </div>
       </div>
     )

@@ -8,6 +8,7 @@
   margin-top: 0px;
   position: relative;
   text-align: center;
+  padding-bottom: 5px;
 }
 
 div img {
@@ -24,7 +25,7 @@ div img {
   background-color: #FAD9B6;
   margin-top: 0px;
   overflow-y: hidden;
-  width: 200px;
+  width: 250px;
 }
 
 @media screen and (max-width: 767px) {
@@ -38,7 +39,8 @@ div img {
 .new-button {
   position: fixed;
   float: left;
-  margin-top: 400px;
+  margin-top: 375px;
+  margin-left: -90px;
 }
 
 div.col-sm-8.mx-auto {
@@ -46,7 +48,7 @@ div.col-sm-8.mx-auto {
   position: fixed;
   padding-top: 15px;
   margin-top: 0px;
-  margin-left: -25px;
+  margin-left: 25px;
   height: 75%;
 }
 
@@ -54,14 +56,15 @@ div.col-sm-8 {
   float: right;
   position: fixed;
   padding-top: 15px;
-  margin-top: 50px;
-  margin-left: 75px;
+  margin-top: 25px;
+  margin-left: 150px;
   height: 75%;
 }
 
 div.col-sm-4 {
   height: 100%;
   padding-left: 0px;
+  margin-top: auto;
 }
 
 .container-fluid {
