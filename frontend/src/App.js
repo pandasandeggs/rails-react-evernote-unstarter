@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
-import Main from './Components/Main'
-import Login from './Components/Login'
+import Main from './Components/Main';
+import Login from './Components/Login';
+import SignUp from './Components/SignUp';
 
 import './App.css';
 
@@ -13,7 +14,8 @@ class App extends Component {
       notes: [],
       currentUser: null,
       displayLogin: true,
-      searchResults: []
+      searchResults: [],
+      displaySignup: true,
     }
   }
 
@@ -30,7 +32,8 @@ class App extends Component {
             if(!data.error){
               this.setState({
                 currentUser: data,
-                displayLogin: false
+                displayLogin: false,
+                displaySignup: false
               })
             }
           }).then( () => {
@@ -47,6 +50,32 @@ class App extends Component {
           })
     }
 
+  }
+
+  signup = (username, password, about) => {
+      localStorage.clear()
+      fetch('http://localhost:3000/api/v1/users', {
+      method: "POST",
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        about: about
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(resp => resp.json())
+      .then(data => {
+        if(!data.error){
+          localStorage.token = data.token;
+          this.setState({
+            currentUser: data.user,
+            displaySignup: false
+          })
+        } else {
+          console.log("User was not successfully created.")
+        }
+      })
   }
 
   login = (username, password) => {
@@ -68,7 +97,8 @@ class App extends Component {
           localStorage.token = data.jwt;
           this.setState({
             currentUser: data.user,
-            displayLogin: false
+            displayLogin: false,
+            displaySignup: false
           })
         } else {
           this.setState({
@@ -134,18 +164,18 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser, displayLogin } = this.state;
+    const { currentUser, displayLogin, displaySignup} = this.state;
     return (
-        <React.Fragment>
-          <Header user={currentUser} handleSearchSubmit= {this.handleSearchSubmit} handleLogout={this.handleLogout}/>
             <div>
+            { displaySignup ? <SignUp signup={this.signup}/> : displayLogin }
             { !displayLogin ?
-              <Main notes={this.state.notes} editedNote={this.updateNote} createdNote={this.createNote} deletedNote={this.deleteNote} searchResults={this.state.searchResults} handleSearchSubmit= {this.handleSearchSubmit}
-              />
-              : <Login login={this.login}/>
-              }
+            <div>
+            <Header user={currentUser} handleSearchSubmit= {this.handleSearchSubmit} handleLogout={this.handleLogout}/>
+            <Main notes={this.state.notes} editedNote={this.updateNote} createdNote={this.createNote} deletedNote={this.deleteNote} searchResults={this.state.searchResults} handleSearchSubmit= {this.handleSearchSubmit}  />
             </div>
-        </React.Fragment>
+            : <Login login={this.login}/>
+            }
+            </div>
     );
   }
 

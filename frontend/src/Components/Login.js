@@ -20,7 +20,7 @@ class Login extends Component {
     const { username, password } = this.state;
     return (
       <div className="card mb-3">
-        <div className="card-header">Login</div>
+        <div className="card-header">Welcome back! Login!</div>
           <div className="card-body">
             <form className="form-group" onSubmit={this.handleSubmit}>
               <label>
